@@ -2,7 +2,7 @@ import express from "express";
 import db from "./config/db.js";
 import { ProductsRoute } from "./routes/productsRoute.js";
 import { SalesRoute } from "./routes/salesRoute.js";
-
+import cron from "node-cron";
 const app = express();
 
 const port = 8000;
@@ -28,6 +28,12 @@ async function main() {
     });
     app.use("/api/v1", ProductsRoute);
     app.use("/api/v1", SalesRoute);
+    // Set up a cron job that runs every hour
+    cron.schedule("*/10 * * * * *", () => {
+      // Fetch data from an external API
+      console.log("running a task every 10 second");
+    });
+
     // Route not found handling
     app.use((req, res, next) => {
       res.status(404).json({
