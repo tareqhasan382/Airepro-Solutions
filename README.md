@@ -24,8 +24,16 @@ This project is a backend application developed with Node.js, MySQL, Express.js,
 
 ## Endpoints
 
-- BASE_URL = http://localhost:8000/api/v1
-- POST api/v1/
-- GET api/v1/
-- GET api/v1/
-- GET api/v1/
+- BASE_URL : http://localhost:8000/api/v1
+
+- POST ("/product")
+- GET ("/products")
+- GET ("/product/:id")
+- PATCH ("/product/:id")
+- DELETE ("/product/:id")
+
+- POST ("/sale")
+- GET ("/sales")
+- GET ("/sale/:id")
+- PATCH ("/sale/:id")
+- DELETE ("/sale/:id")

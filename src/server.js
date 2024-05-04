@@ -31,7 +31,7 @@ async function main() {
     app.use("/api/v1", ProductsRoute);
     app.use("/api/v1", SalesRoute);
     // Set up a cron job that runs every hour
-    cron.schedule("*/10 * * * * *", async () => {
+    cron.schedule("0 1 * * *", async () => {
       try {
         // Fetch data from the external API
         const res = await fetchData();
@@ -49,9 +49,13 @@ async function main() {
             product_id: 3,
             quantity_sold: 20,
           },
+          {
+            product_id: 4,
+            quantity_sold: 20,
+          },
         ];
-        // Insert fetched data into the sales table
-        //  await CornJob(data);
+        //Insert fetched data into the sales table
+        await CornJob(data);
       } catch (error) {
         console.error(error.message);
         return;
