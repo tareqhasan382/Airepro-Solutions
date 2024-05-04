@@ -3,6 +3,8 @@ import db from "./config/db.js";
 import { ProductsRoute } from "./routes/productsRoute.js";
 import { SalesRoute } from "./routes/salesRoute.js";
 import cron from "node-cron";
+import fetchData from "./cornJob/fetchData.js";
+import CornJob from "./cornJob/CornJob.js";
 const app = express();
 
 const port = 8000;
@@ -29,9 +31,31 @@ async function main() {
     app.use("/api/v1", ProductsRoute);
     app.use("/api/v1", SalesRoute);
     // Set up a cron job that runs every hour
-    cron.schedule("*/10 * * * * *", () => {
-      // Fetch data from an external API
-      console.log("running a task every 10 second");
+    cron.schedule("*/10 * * * * *", async () => {
+      try {
+        // Fetch data from the external API
+        const res = await fetchData();
+        console.log("fetch data:", res);
+        const data = [
+          {
+            product_id: 1,
+            quantity_sold: 20,
+          },
+          {
+            product_id: 2,
+            quantity_sold: 20,
+          },
+          {
+            product_id: 3,
+            quantity_sold: 20,
+          },
+        ];
+        // Insert fetched data into the sales table
+        //  await CornJob(data);
+      } catch (error) {
+        console.error(error.message);
+        return;
+      }
     });
 
     // Route not found handling
