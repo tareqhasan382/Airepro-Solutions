@@ -24,7 +24,7 @@ This project is a backend application developed with Node.js, MySQL, Express.js,
 
 ## Endpoints
 
-- BASE_URL : http://localhost:8000/api/v1
+- BASE_URL: https://airepro-solutions.vercel.app/api/v1
 
 - POST ("/product")
 - GET ("/products")
